@@ -33,3 +33,6 @@ SEED = 42
 #----------------数据增强-------------------------
 AUG_ROTATION_DEGREES = 5       # 随机旋转角度范围（±度数）
 AUG_TRANSLATE_RATIO = 0.05     # 随机平移比例（相对于图像尺寸）
+
+#----------------GPU相关-------------------------
+DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')

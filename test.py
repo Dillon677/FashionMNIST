@@ -4,6 +4,9 @@ from config import *
 from model import net
 from dataloader import test_loader
 
+device = DEVICE
+net = net.to(device)
+
 net.load_state_dict(torch.load('best_model.pth'))
 net.eval()
 
@@ -12,6 +15,8 @@ criterion = nn.CrossEntropyLoss()
 test_loss,test_acc,seen = 0,0,0
 with torch.no_grad():
     for xb,yb in test_loader:
+        xb = xb.to(DEVICE)
+        yb = yb.to(DEVICE)
         out = net(xb)
         test_loss += criterion(out,yb).item() * xb.size(0)
         test_acc  += (out.argmax(1) == yb).sum().item()

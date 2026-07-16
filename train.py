@@ -6,6 +6,9 @@ from config import *
 from model import net
 from dataloader import train_loader, valid_loader
 
+device = DEVICE
+net = net.to(device)
+
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.Adam(net.parameters(), lr=LEARNING_RATE)
 
@@ -17,6 +20,8 @@ for epoch in range(1, EPOCHES + 1):
     running_loss, correct, seen = 0, 0, 0
 
     for xb, yb in train_loader:
+        xb = xb.to(DEVICE)
+        yb = yb.to(DEVICE)
         optimizer.zero_grad()
         out = net(xb)
         loss = criterion(out, yb)
@@ -33,6 +38,8 @@ for epoch in range(1, EPOCHES + 1):
     vloss, vcorrect, vseen = 0, 0, 0
     with torch.no_grad():
         for xb, yb in valid_loader:
+            xb = xb.to(DEVICE)
+            yb = yb.to(DEVICE)
             out = net(xb)
             vloss += criterion(out, yb).item() * xb.size(0)
             vcorrect += (out.argmax(1) == yb).sum().item()
