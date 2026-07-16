@@ -13,7 +13,6 @@ CONV2_OUT = 64
 KERNEL_SIZE = 3
 POOL_KERNEL = 2
 FC1_UNITS = 128
-FC2_UNITS = 10
 NUM_CLASS = 10
 DROPOUT = 0.25
 
@@ -30,3 +29,7 @@ MODEL_SAVE_PATH = "./best_model.pth"
 
 #-----------------随机种子------------------------
 SEED = 42
+
+#----------------数据增强-------------------------
+AUG_ROTATION_DEGREES = 5       # 随机旋转角度范围（±度数）
+AUG_TRANSLATE_RATIO = 0.05     # 随机平移比例（相对于图像尺寸）
